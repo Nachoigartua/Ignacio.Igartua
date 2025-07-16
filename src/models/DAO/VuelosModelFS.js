@@ -14,6 +14,24 @@ class VuelosModelFS {
         return JSON.parse(data)
     }
 
+    calcularColisiones = (vuelo, vuelos) => {
+        const colisiones = []
+        for(const otro of vuelos){
+            if(otro.id !== vuelo.id){
+                const d = Math.sqrt(
+                    Math.pow(vuelo.xa - otro.xa, 2) +
+                    Math.pow(vuelo.ya - otro.ya, 2) +
+                    Math.pow(vuelo.za - otro.za, 2)
+                )
+
+                if(d < 500){
+                    colisiones.push(otro.id)
+                }
+            }
+        }
+        return colisiones
+    }
+
     postVuelo = async (vuelo) => {
         const data = await fs.promises.readFile(this.path, "utf-8")
         const vuelos = JSON.parse(data)
@@ -28,23 +46,7 @@ class VuelosModelFS {
 
         await fs.promises.writeFile(this.path, JSON.stringify(vuelos, null, 2))
 
-        const colisiones = []
-
-        for(const otro of vuelos){
-            if(otro.id !== vuelo.id){
-                const d = Math.sqrt(
-                    Math.pow(vuelo.xa - otro.xa, 2) +
-                    Math.pow(vuelo.ya - otro.ya, 2) +
-                    Math.pow(vuelo.za - otro.za, 2)
-                )
-
-                if(d < 500){
-                    colisiones.push(otro.id)
-                }
-            }
-        }
-
-        return colisiones
+        return this.calcularColisiones(vuelo, vuelos)
     }
 }
 

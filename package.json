@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "watch": "node --watch .",
-    "test": "mocha src/test/algo.integration.test.js"
+    "test": "mocha test/Vuelos.integration.test.js"
   },
   "keywords": [],
   "author": "",

@@ -4,6 +4,23 @@ class VuelosModelMongo {
     constructor() {
     }
 
+    calcularColisiones = (vuelo, vuelos) => {
+        const colisiones = [];
+        for (const otro of vuelos) {
+            if (otro.id !== vuelo.id) {
+                const d = Math.sqrt(
+                    Math.pow(vuelo.xa - otro.xa, 2) +
+                    Math.pow(vuelo.ya - otro.ya, 2) +
+                    Math.pow(vuelo.za - otro.za, 2)
+                );
+                if (d < 500) {
+                    colisiones.push(otro.id);
+                }
+            }
+        }
+        return colisiones;
+    }
+
     async getVuelos() {
         if (!MongoConnection.db) {
             await MongoConnection.connection();
@@ -26,23 +43,7 @@ class VuelosModelMongo {
         }
 
         const todos = await collection.find({}).toArray();
-        const colisiones = [];
-
-        for (const otro of todos) {
-            if (otro.id !== vuelo.id) {
-                const d = Math.sqrt(
-                    Math.pow(vuelo.xa - otro.xa, 2) +
-                    Math.pow(vuelo.ya - otro.ya, 2) +
-                    Math.pow(vuelo.za - otro.za, 2)
-                );
-
-                if (d < 500) {
-                    colisiones.push(otro.id);
-                }
-            }
-        }
-
-        return colisiones;
+        return this.calcularColisiones(vuelo, todos);
     }
 }
 

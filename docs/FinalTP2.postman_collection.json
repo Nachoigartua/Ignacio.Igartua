@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "a088a3e3-c476-49bd-a39f-46e6cc9ba18d",
+		"name": "FinalTP2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45382635",
+		"_collection_link": "https://ignacio-1754203.postman.co/workspace/Ignacio's-Workspace~69ce8d99-039d-47ce-85c5-661fed51b65c/collection/45382635-a088a3e3-c476-49bd-a39f-46e6cc9ba18d?action=share&source=collection_link&creator=45382635"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"request": {
+				"method": "Post",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "Post",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
